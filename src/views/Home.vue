@@ -3,8 +3,9 @@
     <el-aside width="200px"
               style="background-color: rgb(50,64,87)">
       <el-menu router
-               :default-openeds="['1']">
-        <el-menu-item index="1-1">
+               unique-opened
+               :default-active="$route.path">
+        <el-menu-item index="/message">
           <i class="el-icon-s-home"></i>
           首页</el-menu-item>
         <el-submenu index="1">
@@ -27,21 +28,21 @@
         <el-submenu index="3">
           <template slot="title"><i class="el-icon-star-on"></i>图表</template>
           <el-menu-item-group>
-            <el-menu-item index="3-1">用户分布</el-menu-item>
+            <el-menu-item index="/chart">用户分布</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
 
         <el-submenu index="4">
           <template slot="title"><i class="el-icon-setting"></i>设置</template>
           <el-menu-item-group>
-            <el-menu-item index="3-1">管理员设置</el-menu-item>
+            <el-menu-item index="/adminSetting">管理员设置</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
 
         <el-submenu index="5">
           <template slot="title"><i class="el-icon-info"></i>说明</template>
           <el-menu-item-group>
-            <el-menu-item index="3-1">说明</el-menu-item>
+            <el-menu-item index="/explain">说明</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>
@@ -69,7 +70,7 @@
       </el-header>
 
       <el-main>
-        <router-view></router-view>
+        <router-view :key="$route.path"></router-view>
       </el-main>
     </el-container>
   </el-container>

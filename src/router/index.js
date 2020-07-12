@@ -8,7 +8,30 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    redirect: "/message",
+    children: [
+      {
+        path: '/message',
+        name: "message",
+        component: () => import('../views/Message.vue')
+      },
+      {
+        path: 'explain',
+        name: "explain",
+        component: () => import('../views/Explain.vue')
+      },
+      {
+        path: 'chart',
+        name: "chart",
+        component: () => import('../views/Chart.vue')
+      },
+      {
+        path: 'adminSetting',
+        name: "adminSetting",
+        component: () => import('../views/AdminSetting.vue')
+      }
+    ]
   },
   {
     path: '/about',

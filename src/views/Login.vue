@@ -15,15 +15,15 @@
                label-width="100px"
                class="demo-elm_form">
         <el-form-item label="用户名"
-                      prop="username">
+                      prop="user_name">
           <el-input type="text"
-                    v-model="elm_form.username"
+                    v-model="elm_form.user_name"
                     autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="密码"
-                      prop="pass">
+                      prop="password">
           <el-input type="password"
-                    v-model="elm_form.pass"
+                    v-model="elm_form.password"
                     autocomplete="off"></el-input>
         </el-form-item>
 
@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import { Submit } from '../api/login'
 export default {
   name: "login",
   data () {
@@ -51,8 +52,8 @@ export default {
       if (value === '') {
         callback(new Error('请输入密码'));
       } else {
-        if (this.elm_form.username !== '') {
-          this.$refs.elm_form.validateField('username');
+        if (this.elm_form.user_name !== '') {
+          this.$refs.elm_form.validateField('user_name');
         }
         callback();
       }
@@ -63,19 +64,19 @@ export default {
       } else {
         console.log(11)
 
-        if (this.elm_form.pass !== '') {
-          this.$refs.elm_form.validateField('pass');
+        if (this.elm_form.password !== '') {
+          this.$refs.elm_form.validateField('password');
         }
         callback();
       }
     };
     return {
       elm_form: {
-        username: '',
-        pass: '',
+        user_name: '',
+        password: '',
       },
       rules: {
-        pass: [
+        password: [
           { validator: validatePass, trigger: 'blur' }
         ],
         username: [
@@ -85,20 +86,19 @@ export default {
     };
   },
   methods: {
-    submitForm (formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          alert('submit!');
-        } else {
-          console.log('error submit!!');
-          return false;
-        }
-      });
+    async submitForm () {
+      Submit(this.elm_form).then(res => {
+        this.$message({
+          message: '恭喜你，登录成功',
+          type: 'success'
+        })
+        this.$router.push('/')
+      })
     },
     resetForm (formName) {
       this.$refs[formName].resetFields();
-    }
-  }
+    },
+  },
 }
 
 </script>
