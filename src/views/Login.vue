@@ -62,8 +62,6 @@ export default {
       if (value === '') {
         callback(new Error('请输入用户名'));
       } else {
-        console.log(11)
-
         if (this.elm_form.password !== '') {
           this.$refs.elm_form.validateField('password');
         }

@@ -25,7 +25,7 @@ class HttpRequest {
 
     instance.interceptors.response.use(res => {
       const { data, status } = res
-      return { data, status }
+      return res
     }, error => {
       return Promise.reject(error)
     })
