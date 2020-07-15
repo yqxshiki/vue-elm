@@ -6,3 +6,17 @@ export const getuserList = ({ offset, limit }) => {
     method: "get"
   })
 }
+
+export const getadminList = ({ offset, limit }) => {
+  return axios.requset({
+    url: `/admin/all?offset=${offset}&limit=${limit}`,
+    method: "get"
+  })
+}
+
+export const getordersnList = ({ offset, limit }) => {
+  return axios.requset({
+    url: `/bos/orders?offset=${offset}&limit=${limit}`,
+    method: "get"
+  })
+}

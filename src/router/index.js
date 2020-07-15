@@ -16,10 +16,21 @@ const routes = [
         name: "message",
         component: () => import('../views/Message.vue')
       },
+      // {
+      //   path: '/:path/list',
+      //   name: "list",
+      //   component: () => import('../components/List.vue'),
+      //   props: true
+      // },
       {
-        path: '/list',
-        name: "list",
-        component: () => import('../views/List.vue')
+        path: '/admin_list',
+        name: "admin_list",
+        component: () => import('../views/List/Admin_list.vue')
+      },
+      {
+        path: '/user_list',
+        name: "user_list",
+        component: () => import('../views/List/User_list.vue')
       },
       {
         path: 'explain',
