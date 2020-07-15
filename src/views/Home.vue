@@ -12,9 +12,9 @@
           <template slot="title"><i class="el-icon-menu"></i>数据管理</template>
           <el-menu-item-group>
             <el-menu-item index="/user_list">用户列表</el-menu-item>
-            <el-menu-item index="1-2">商家列表</el-menu-item>
+            <el-menu-item index="/shop_list">商家列表</el-menu-item>
             <el-menu-item index="1-3">食品列表</el-menu-item>
-            <el-menu-item index="1-4-1">食品列表</el-menu-item>
+            <el-menu-item index="/order_list">订单列表</el-menu-item>
             <el-menu-item index="/admin_list">管理员列表</el-menu-item>
           </el-menu-item-group>
         </el-submenu>

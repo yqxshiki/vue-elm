@@ -33,6 +33,16 @@ const routes = [
         component: () => import('../views/List/User_list.vue')
       },
       {
+        path: '/shop_list',
+        name: "shop_list",
+        component: () => import('../views/List/Shop_list.vue')
+      },
+      {
+        path: '/order_list',
+        name: "order_list",
+        component: () => import('../views/List/Order_list.vue')
+      },
+      {
         path: 'explain',
         name: "explain",
         component: () => import('../views/Explain.vue')

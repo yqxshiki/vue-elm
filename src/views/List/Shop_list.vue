@@ -2,7 +2,7 @@
   <div>
     <list :path="'shop_list'"
           :lable_column="column"
-          :isAdmin=false></list>
+          :operation=true></list>
   </div>
 </template>
 
