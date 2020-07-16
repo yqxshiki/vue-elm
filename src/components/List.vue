@@ -8,14 +8,14 @@
       <el-table-column v-if="isExpand"
                        type="expand">
         <template slot-scope="props">
-          <el-form label-position="left"
+          <el-form label-position="center"
                    inline
                    class="demo-table-expand"
-                   v-if="isSuccessData">
-            <el-form-item v-for="(expand_lable,index) in lable_expand"
-                          :key="'lable_expand'+index"
-                          :label="expand_lable.column_key">
-              <span>{{ props.row[expand_lable.prop] }}</span>
+                   v-for="(expand_lable,index) in lable_expand"
+                   :key="'lable_expand'+index"
+                   v-show="isSuccessData">
+            <el-form-item :label="expand_lable.column_key">
+              <span>{{ props.row.ExpandData[expand_lable.prop]}}</span>
             </el-form-item>
           </el-form>
         </template>
@@ -100,7 +100,6 @@ export default {
         offset: 0,
         limit: 1
       },
-      ExpandData: [],
       isSuccessData: false
     }
   },
@@ -113,10 +112,8 @@ export default {
         return
       } else {
         row.isExpand = true
-        this.getExpand(row.address_id)
-        setTimeout(() => {
-          this.isSuccessData = true
-        }, 2000);
+        this.getExpand(row.address_id, expandedRows[0])
+        this.isSuccessData = false
       }
     },
     // 设置每页多少个数据
@@ -127,6 +124,11 @@ export default {
       this.currentPage = val;
       this.getinfo(this.config.offset + (val - 1) * this.pagesize, this.config.limit * this.pagesize)
     },
+    foreachData (tableData) {
+      for (let i = 0; i < tableData.length; i++) {
+        tableData[i].ExpandData = []
+      }
+    },
     // handleEdit (index, row) {
     //   console.log(index, row);
     // },
@@ -134,13 +136,16 @@ export default {
     //   console.log(index, row);
     // },
     // 获取数据
-    getExpand (id) {
+    getExpand (id, $data) {
       if (this.isExpand) {
         getaddresse(id).then(res => {
-          this.ExpandData = res.data
-          getshopDetail(this.ExpandData.city_id).then(resDetail => {
-            this.ExpandData = Object.assign(this.ExpandData, resDetail.data)
-            console.log(this.ExpandData)
+          $data.ExpandData = res.data
+          getshopDetail($data.ExpandData.city_id).then(resDetail => {
+            $data.ExpandData = Object.assign($data.ExpandData, resDetail.data)
+            console.log($data.ExpandData)
+            setTimeout(() => {
+              this.isSuccessData = true
+            });
           })
         })
       } else {
@@ -164,6 +169,7 @@ export default {
         case 'order_list':
           getordersnList({ offset, limit }).then(res => {
             this.tableData = res.data
+            this.foreachData(this.tableData)
             console.log(this.tableData)
           })
           break;

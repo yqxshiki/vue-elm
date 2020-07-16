@@ -19,9 +19,9 @@ export default {
         { column_key: "	订单状态", prop: "operation_confirm" },
       ],
       lable_expand: [
-        { column_key: "	用户名", prop: "id" },
+        { column_key: "	用户名", prop: "name" },
         { column_key: "	 店铺名称", prop: "name" },
-        { column_key: "	收货地址", prop: "operation_confirm" },
+        { column_key: "	收货地址", prop: "address" },
         { column_key: "	 店铺 ID", prop: "city_id" },
         { column_key: "	 店铺地址", prop: "address" },
       ]
