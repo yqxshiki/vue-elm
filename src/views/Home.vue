@@ -13,7 +13,7 @@
           <el-menu-item-group>
             <el-menu-item index="/user_list">用户列表</el-menu-item>
             <el-menu-item index="/shop_list">商家列表</el-menu-item>
-            <el-menu-item index="1-3">食品列表</el-menu-item>
+            <el-menu-item index="/food_list">食品列表</el-menu-item>
             <el-menu-item index="/order_list">订单列表</el-menu-item>
             <el-menu-item index="/admin_list">管理员列表</el-menu-item>
           </el-menu-item-group>
@@ -53,10 +53,9 @@
                  class="header">
         <el-breadcrumb separator-class="el-icon-arrow-right"
                        style="line-height:60px">
-          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-          <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: `/` }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item v-for="(item, index) in $route.meta.title"
+                              :key="'item'+index">{{item}}</el-breadcrumb-item>
         </el-breadcrumb>
         <el-dropdown>
           <img src="../assets/13.jpg"
@@ -84,7 +83,7 @@ export default {
     return {
 
     }
-  }
+  },
 };
 </script>
 

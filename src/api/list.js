@@ -30,10 +30,21 @@ export const getaddresse = (addresse) => {
   })
 }
 
-// 获取餐馆详情
+// 获取订单餐馆详情
 export const getshopDetail = (shop) => {
   return axios.requset({
     url: `/shopping/restaurant/${shop}`,
     method: "get"
   })
 }
+
+
+// 获取用户信息
+export const getuserinfo = (id) => {
+  return axios.requset({
+    url: `/v1/user/${id}`,
+    method: "get"
+  })
+}
+
+

@@ -8,7 +8,7 @@
       <el-table-column v-if="isExpand"
                        type="expand">
         <template slot-scope="props">
-          <el-form label-position="center"
+          <el-form label-position="left"
                    inline
                    class="demo-table-expand"
                    v-for="(expand_lable,index) in lable_expand"
@@ -60,7 +60,8 @@
 </template>
 
 <script>
-import { getuserList, getadminList, getordersnList, getaddresse, getshopDetail } from '../api/list'
+import { mapState } from 'vuex'
+import { getuserList, getadminList, getordersnList, getaddresse, getshopDetail, getuserinfo } from '../api/list'
 export default {
   name: "list",
   props: {
@@ -94,26 +95,33 @@ export default {
     return {
       tableData: [
       ],
+      // 分页设置
       currentPage: 1,
       pagesize: 10,
       config: {
         offset: 0,
         limit: 1
       },
-      isSuccessData: false
+      isSuccessData: true
     }
+  },
+  computed: {
+    ...mapState({
+      list: state => state.list
+    })
   },
   methods: {
     isZero (value) {
       return value != 0 ? value : "支付超时"
     },
     open (row, expandedRows) {
-      if (row.isExpand) {
+      if (row.isShow) {
         return
       } else {
-        row.isExpand = true
-        this.getExpand(row.address_id, expandedRows[0])
-        this.isSuccessData = false
+        row.isShow = true
+        let length = expandedRows.length
+        this.newExpandedRows = expandedRows[length - 1]
+        this.getExpand({ address: row.address_id, user: row.user_id, restaurant: row.restaurant_id, row }, this.newExpandedRows)
       }
     },
     // 设置每页多少个数据
@@ -136,20 +144,20 @@ export default {
     //   console.log(index, row);
     // },
     // 获取数据
-    getExpand (id, $data) {
+    async getExpand (obj, $data) {
       if (this.isExpand) {
-        getaddresse(id).then(res => {
-          $data.ExpandData = res.data
-          getshopDetail($data.ExpandData.city_id).then(resDetail => {
-            $data.ExpandData = Object.assign($data.ExpandData, resDetail.data)
-            console.log($data.ExpandData)
-            setTimeout(() => {
-              this.isSuccessData = true
-            });
-          })
-        })
+        const addresse = await getaddresse(obj.address)
+        const restaurant = await getshopDetail(obj.restaurant)
+        const user = await getuserinfo(obj.user)
+        $data.ExpandData.user_address = addresse.data.address
+        $data.ExpandData.name = user.data.username
+        $data.ExpandData.shop_address = restaurant.data.address
+        $data.ExpandData.shop_name = restaurant.data.name
+        $data.ExpandData.shop_id = obj.restaurant
+        this.$refs.listTable.toggleRowExpansion(obj.row, false)
+        this.$refs.listTable.toggleRowExpansion(obj.row, true)
       } else {
-        //
+        return
       }
     },
     getinfo (offset, limit) {
@@ -157,20 +165,20 @@ export default {
         case 'admin_list':
           getadminList({ offset, limit }).then(res => {
             this.tableData = res.data.data
-            console.log(this.tableData)
+            // console.log(this.tableData)
           })
           break;
         case 'user_list':
           getuserList({ offset, limit }).then(res => {
             this.tableData = res.data
-            console.log(this.tableData)
+            // console.log(this.tableData)
           })
           break;
         case 'order_list':
           getordersnList({ offset, limit }).then(res => {
             this.tableData = res.data
             this.foreachData(this.tableData)
-            console.log(this.tableData)
+            // console.log(this.tableData)
           })
           break;
         default:

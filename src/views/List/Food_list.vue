@@ -1,6 +1,6 @@
 <template>
   <div>
-    <list :path="'order_list'"
+    <list :path="'food_list'"
           :lable_column="column"
           :lable_expand="lable_expand"
           :isExpand=true></list>
@@ -10,7 +10,7 @@
 <script>
 import list from '../../components/List'
 export default {
-  name: "order_list",
+  name: "food_list",
   data () {
     return {
       column: [
@@ -20,10 +20,10 @@ export default {
       ],
       lable_expand: [
         { column_key: "	用户名", prop: "name" },
-        { column_key: "	 店铺名称", prop: "shop_name" },
-        { column_key: "	收货地址", prop: "user_address" },
-        { column_key: "	 店铺 ID", prop: "shop_id" },
-        { column_key: "	 店铺地址", prop: "shop_address" },
+        { column_key: "	 店铺名称", prop: "name" },
+        { column_key: "	收货地址", prop: "address" },
+        { column_key: "	 店铺 ID", prop: "city_id" },
+        { column_key: "	 店铺地址", prop: "address" },
       ]
     }
   },

@@ -25,37 +25,67 @@ const routes = [
       {
         path: '/admin_list',
         name: "admin_list",
-        component: () => import('../views/List/Admin_list.vue')
+        component: () => import('../views/List/Admin_list.vue'),
+        meta: {
+          title: ['数据管理', "管理员列表"]
+        }
+
       },
       {
         path: '/user_list',
         name: "user_list",
-        component: () => import('../views/List/User_list.vue')
+        component: () => import('../views/List/User_list.vue'),
+        meta: {
+          title: ['数据管理', "用户列表"]
+        }
       },
       {
         path: '/shop_list',
         name: "shop_list",
-        component: () => import('../views/List/Shop_list.vue')
+        component: () => import('../views/List/Shop_list.vue'),
+        meta: {
+          title: ['数据管理', "商家列表"]
+        }
+      },
+      {
+        path: '/food_list',
+        name: "food_list",
+        component: () => import('../views/List/Food_list.vue'),
+        meta: {
+          title: ['数据管理', "食品列表"]
+        }
       },
       {
         path: '/order_list',
         name: "order_list",
-        component: () => import('../views/List/Order_list.vue')
+        component: () => import('../views/List/Order_list.vue'),
+        meta: {
+          title: ['数据管理', "订单列表"]
+        }
       },
       {
         path: 'explain',
         name: "explain",
-        component: () => import('../views/Explain.vue')
+        component: () => import('../views/Explain.vue'),
+        meta: {
+          title: ["说明", "说明"]
+        }
       },
       {
         path: 'chart',
         name: "chart",
-        component: () => import('../views/Chart.vue')
+        component: () => import('../views/Chart.vue'),
+        meta: {
+          title: ['图表', "用户分布"]
+        }
       },
       {
         path: 'adminSetting',
         name: "adminSetting",
-        component: () => import('../views/AdminSetting.vue')
+        component: () => import('../views/AdminSetting.vue'),
+        meta: {
+          title: ['设置', "管理员设置"]
+        }
       }
     ]
   },
@@ -83,6 +113,13 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+
+router.beforeEach((to, from, next) => {
+  // ...
+
+  next()
 })
 
 export default router
