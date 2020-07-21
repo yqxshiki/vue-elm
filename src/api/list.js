@@ -47,4 +47,28 @@ export const getuserinfo = (id) => {
   })
 }
 
+// 获取所在城市
+export const getCity = () => {
+  return axios.requset({
+    url: `/v1/cities?type=guess`,
+    method: "get"
+  })
+}
 
+// 获取商铺列表
+export const getShoplist = ({ latitude, longitude, offset, limit }) => {
+  return axios.requset({
+    url: `/shopping/restaurants?latitude=${latitude}&longitude=${longitude}&offset=${offset}&limit=${limit}`,
+    method: "get"
+  })
+}
+
+
+
+// 获取食品列表
+export const getFoodList = ({ offset, limit }) => {
+  return axios.requset({
+    url: `/shopping/v2/foods?offset=${offset}&limit=${limit}&restaurant_id=undefined`,
+    method: "get"
+  })
+}

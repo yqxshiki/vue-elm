@@ -14,16 +14,20 @@ export default {
   data () {
     return {
       column: [
-        { column_key: "	订单 ID", prop: "id" },
-        { column_key: "	总价格", prop: "total_amount" },
-        { column_key: "	订单状态", prop: "operation_confirm" },
+        { column_key: "	食品名称", prop: "name" },
+        { column_key: "	食品介绍", prop: "description" },
+        { column_key: "	评分", prop: "rating" },
       ],
       lable_expand: [
-        { column_key: "	用户名", prop: "name" },
-        { column_key: "	 店铺名称", prop: "name" },
-        { column_key: "	收货地址", prop: "address" },
-        { column_key: "	 店铺 ID", prop: "city_id" },
-        { column_key: "	 店铺地址", prop: "address" },
+        { column_key: "	食品名称", prop: "name" },
+        { column_key: "	食品ID", prop: "item_id" },
+        { column_key: "	 食品介绍", prop: "description" },
+        { column_key: "	食品评分", prop: "rating" },
+        { column_key: "	 餐馆名称", prop: "city_id" },
+        { column_key: "	 餐馆ID", prop: "restaurant_id" },
+        { column_key: "	 餐馆地址", prop: "address" },
+        { column_key: "	 餐馆分类", prop: "category" },
+        { column_key: "	 月销量", prop: "month_sales" },
       ]
     }
   },

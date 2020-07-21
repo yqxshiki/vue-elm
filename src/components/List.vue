@@ -12,8 +12,7 @@
                    inline
                    class="demo-table-expand"
                    v-for="(expand_lable,index) in lable_expand"
-                   :key="'lable_expand'+index"
-                   v-show="isSuccessData">
+                   :key="'lable_expand'+index">
             <el-form-item :label="expand_lable.column_key">
               <span>{{ props.row.ExpandData[expand_lable.prop]}}</span>
             </el-form-item>
@@ -23,8 +22,7 @@
       <!-- 主要展示栏 -->
       <el-table-column v-for="(item,index) in lable_column"
                        :key="'lable_column'+index"
-                       :label="item.column_key"
-                       width="180">
+                       :label="item.column_key">
         <template slot-scope="scope">
           <span style="margin-left: 10px">
             {{isZero(scope.row[item.prop])}}
@@ -53,7 +51,7 @@
                      :page-sizes="[10,15,20]"
                      :page-size="pagesize"
                      layout="total, sizes, prev, pager, next, jumper"
-                     :total="1000">
+                     :total="total">
       </el-pagination>
     </div>
   </div>
@@ -61,7 +59,10 @@
 
 <script>
 import { mapState } from 'vuex'
-import { getuserList, getadminList, getordersnList, getaddresse, getshopDetail, getuserinfo } from '../api/list'
+import { getuserList, getadminList, getordersnList, getaddresse, getshopDetail, getuserinfo, getCity, getShoplist, getFoodList } from '../api/list'
+import * as api from '../api/message'
+import { shopCount, foodCount } from '../api/count'
+// import { loop } from '../lib/util'
 export default {
   name: "list",
   props: {
@@ -102,7 +103,7 @@ export default {
         offset: 0,
         limit: 1
       },
-      isSuccessData: true
+      total: 0,
     }
   },
   computed: {
@@ -114,6 +115,7 @@ export default {
     isZero (value) {
       return value != 0 ? value : "支付超时"
     },
+    // 点击展开栏
     open (row, expandedRows) {
       if (row.isShow) {
         return
@@ -137,6 +139,7 @@ export default {
         tableData[i].ExpandData = []
       }
     },
+
     // handleEdit (index, row) {
     //   console.log(index, row);
     // },
@@ -146,40 +149,73 @@ export default {
     // 获取数据
     async getExpand (obj, $data) {
       if (this.isExpand) {
-        const addresse = await getaddresse(obj.address)
-        const restaurant = await getshopDetail(obj.restaurant)
-        const user = await getuserinfo(obj.user)
-        $data.ExpandData.user_address = addresse.data.address
-        $data.ExpandData.name = user.data.username
-        $data.ExpandData.shop_address = restaurant.data.address
-        $data.ExpandData.shop_name = restaurant.data.name
-        $data.ExpandData.shop_id = obj.restaurant
-        this.$refs.listTable.toggleRowExpansion(obj.row, false)
-        this.$refs.listTable.toggleRowExpansion(obj.row, true)
+        switch (this.path) {
+          case 'shop_list':
+            $data.ExpandData = $data
+            break;
+          case 'order_list':
+            const addresse = await getaddresse(obj.address)
+            const restaurant = await getshopDetail(obj.restaurant)
+            const user = await getuserinfo(obj.user)
+            $data.ExpandData.user_address = addresse.data.address
+            $data.ExpandData.name = user.data.username
+            $data.ExpandData.shop_address = restaurant.data.address
+            $data.ExpandData.shop_name = restaurant.data.name
+            $data.ExpandData.shop_id = obj.restaurant
+            this.$refs.listTable.toggleRowExpansion(obj.row, false)
+            this.$refs.listTable.toggleRowExpansion(obj.row, true)
+            break;
+          case 'food_list':
+            $data.ExpandData = $data
+            break;
+          default:
+            break;
+        }
+
       } else {
         return
       }
     },
-    getinfo (offset, limit) {
+    async getinfo (offset, limit) {
       switch (this.path) {
         case 'admin_list':
           getadminList({ offset, limit }).then(res => {
             this.tableData = res.data.data
-            // console.log(this.tableData)
           })
+          var count = await api.getAlladminCount()
+          this.total = count.data.count
           break;
         case 'user_list':
           getuserList({ offset, limit }).then(res => {
             this.tableData = res.data
-            // console.log(this.tableData)
           })
+          var count = await api.getAlluserCount()
+          this.total = count.data.count
           break;
         case 'order_list':
           getordersnList({ offset, limit }).then(res => {
             this.tableData = res.data
             this.foreachData(this.tableData)
-            // console.log(this.tableData)
           })
+          var count = await api.getAllordersCount()
+          this.total = count.data.count
+          break;
+        case 'shop_list':
+          const city = await getCity()
+          const { latitude, longitude } = city.data
+          getShoplist({ latitude, longitude, offset, limit }).then(res => {
+            this.tableData = res.data
+            this.foreachData(this.tableData)
+          })
+          var count = await shopCount()
+          this.total = count.data.count
+          break;
+        case 'food_list':
+          getFoodList({ offset, limit }).then(res => {
+            this.tableData = res.data
+          })
+          var count = await foodCount()
+          this.total = count.data.count
           break;
         default:
           break;
@@ -192,5 +228,18 @@ export default {
 }
 
 </script>
-<style>
+<style scoped>
+.el-table__expanded-cell {
+  background: rgb(251, 253, 255);
+  height: 40px;
+}
+.el-form-item {
+  margin-bottom: 0px;
+}
+
+.el-form-item {
+  margin-right: 0;
+  margin-bottom: 0;
+  width: 50%;
+}
 </style>
