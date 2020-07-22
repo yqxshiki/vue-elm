@@ -21,8 +21,8 @@
         <el-submenu index="2">
           <template slot="title"><i class="el-icon-folder-add"></i>添加数据</template>
           <el-menu-item-group>
-            <el-menu-item index="2-1">添加商铺</el-menu-item>
-            <el-menu-item index="2-2">添加食品</el-menu-item>
+            <el-menu-item index="/add_shop">添加商铺</el-menu-item>
+            <el-menu-item index="/add_food">添加食品</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="3">

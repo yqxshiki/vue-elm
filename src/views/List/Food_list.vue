@@ -3,7 +3,8 @@
     <list :path="'food_list'"
           :lable_column="column"
           :lable_expand="lable_expand"
-          :isExpand=true></list>
+          :isExpand=true
+          :operation=true></list>
   </div>
 </template>
 

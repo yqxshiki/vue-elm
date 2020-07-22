@@ -64,6 +64,23 @@ const routes = [
         }
       },
       {
+        path: '/add_shop',
+        name: "add_shop",
+        component: () => import('../views/Add/Shop.vue'),
+        meta: {
+          title: ['添加数据', "添加商铺"]
+        }
+      },
+      {
+        path: '/add_food',
+        name: "add_food",
+        component: () => import('../views/Add/Food.vue'),
+        meta: {
+          title: ['添加数据', "添加商品"]
+        }
+      },
+      //
+      {
         path: 'explain',
         name: "explain",
         component: () => import('../views/Explain.vue'),
