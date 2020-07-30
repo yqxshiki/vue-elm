@@ -14,3 +14,10 @@ export const addShop = (data) => {
     data: data
   })
 }
+
+export const search_address = (id, keyword) => {
+  return axios.requset({
+    url: `/v1/pois?city_id=${id}&keyword=${keyword}&type=search`,
+    method: "get",
+  })
+}

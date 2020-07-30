@@ -1,13 +1,11 @@
 <template>
   <el-container style="height: 100vh; border: 1px solid #eee">
-    <el-aside width="200px"
-              style="background-color: rgb(50,64,87)">
-      <el-menu router
-               unique-opened
-               :default-active="$route.path">
+    <el-aside width="200px" style="background-color: rgb(50,64,87)">
+      <el-menu router unique-opened :default-active="$route.path">
         <el-menu-item index="/message">
           <i class="el-icon-s-home"></i>
-          首页</el-menu-item>
+          首页</el-menu-item
+        >
         <el-submenu index="1">
           <template slot="title"><i class="el-icon-menu"></i>数据管理</template>
           <el-menu-item-group>
@@ -19,7 +17,9 @@
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="2">
-          <template slot="title"><i class="el-icon-folder-add"></i>添加数据</template>
+          <template slot="title"
+            ><i class="el-icon-folder-add"></i>添加数据</template
+          >
           <el-menu-item-group>
             <el-menu-item index="/add_shop">添加商铺</el-menu-item>
             <el-menu-item index="/add_food">添加食品</el-menu-item>
@@ -49,18 +49,20 @@
     </el-aside>
 
     <el-container>
-      <el-header style="font-size: 12px;color:#000"
-                 class="header">
-        <el-breadcrumb separator-class="el-icon-arrow-right"
-                       style="line-height:60px">
+      <el-header style="font-size: 12px;color:#000" class="header">
+        <el-breadcrumb
+          separator-class="el-icon-arrow-right"
+          style="line-height:60px"
+        >
           <el-breadcrumb-item :to="{ path: `/` }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item v-for="(item, index) in $route.meta.title"
-                              :key="'item'+index">{{item}}</el-breadcrumb-item>
+          <el-breadcrumb-item
+            v-for="(item, index) in $route.meta.title"
+            :key="'item' + index"
+            >{{ item }}</el-breadcrumb-item
+          >
         </el-breadcrumb>
         <el-dropdown>
-          <img src="../assets/13.jpg"
-               alt="图像"
-               class="tuxiang">
+          <img src="../assets/13.jpg" alt="图像" class="tuxiang" />
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>首页</el-dropdown-item>
             <el-dropdown-item>退出</el-dropdown-item>
@@ -76,15 +78,19 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 export default {
-  name: "home",
-  data () {
-
-    return {
-
-    }
+  name: 'home',
+  data() {
+    return {}
   },
-};
+  methods: {
+    ...mapActions(['getCityInfo']),
+  },
+  created() {
+    this.getCityInfo()
+  },
+}
 </script>
 
 <style lang="scss">
