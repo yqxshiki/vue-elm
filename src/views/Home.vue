@@ -64,8 +64,12 @@
         <el-dropdown>
           <img src="../assets/13.jpg" alt="图像" class="tuxiang" />
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>首页</el-dropdown-item>
-            <el-dropdown-item>退出</el-dropdown-item>
+            <el-dropdown-item>
+              <span @click="Gohome">首页</span>
+            </el-dropdown-item>
+            <el-dropdown-item>
+              <span @click="quit">退出</span>
+            </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
@@ -79,6 +83,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import { Singout } from '../api/login'
 export default {
   name: 'home',
   data() {
@@ -86,6 +91,12 @@ export default {
   },
   methods: {
     ...mapActions(['getCityInfo']),
+    Gohome() {
+      this.$router.push('/')
+    },
+    async quit() {
+      const data = await Singout()
+    },
   },
   created() {
     this.getCityInfo()

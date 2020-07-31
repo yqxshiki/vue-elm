@@ -4,10 +4,10 @@ export const imgUrl = () => {
 }
 
 
-export const localSetItem = (value, key = "elm_cityinfo") => {
+export const localSetItem = (key, value) => {
   localStorage.setItem(key, value)
 }
 
-export const localGetItem = (key = 'elm_cityinfo') => {
+export const localGetItem = (key) => {
   return localStorage.getItem(key)
 }

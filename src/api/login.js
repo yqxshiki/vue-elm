@@ -7,3 +7,11 @@ export const Submit = (options) => {
     data: options
   })
 }
+
+
+export const Singout = (options) => {
+  return axios.requset({
+    url: "/admin/singout",
+    method: "get",
+  })
+}

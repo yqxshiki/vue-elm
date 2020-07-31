@@ -5,6 +5,9 @@ import axios from 'axios'
 //   baseURL: 'https://elm.cangdu.org'
 // })
 
+
+axios.defaults.withCredentials = true
+
 class HttpRequest {
   constructor(baseUrl = process.env.VUE_APP_URL) {
     this.baseUrl = baseUrl

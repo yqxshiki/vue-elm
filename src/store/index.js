@@ -17,7 +17,7 @@ export default new Vuex.Store({
     async getCityInfo (commit) {
       const data = await getCity()
       this.state.cityInfo = data.data
-      localGetItem(data.data)
+      localGetItem(process.env.VUE_APP_CITYINFO, data.data)
     }
   },
   modules: {
