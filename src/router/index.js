@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
+import { localGetItem } from '../lib/util'
 const routes = [
   {
     path: '/',
@@ -81,7 +82,7 @@ const routes = [
       },
       //
       {
-        path: 'explain',
+        path: '/explain',
         name: "explain",
         component: () => import('../views/Explain.vue'),
         meta: {
@@ -89,7 +90,7 @@ const routes = [
         }
       },
       {
-        path: 'chart',
+        path: '/chart',
         name: "chart",
         component: () => import('../views/Chart.vue'),
         meta: {
@@ -97,7 +98,7 @@ const routes = [
         }
       },
       {
-        path: 'adminSetting',
+        path: '/adminSetting',
         name: "adminSetting",
         component: () => import('../views/AdminSetting.vue'),
         meta: {
@@ -117,6 +118,9 @@ const routes = [
   {
     path: "/login",
     name: "login",
+    meta: {
+      isPublic: false
+    },
     component: () => import('../views/Login.vue')
   },
   {
@@ -134,9 +138,17 @@ const router = new VueRouter({
 
 
 router.beforeEach((to, from, next) => {
-  // ...
+  if (to.meta.isPublic == undefined) {
+    to.meta.isPublic = true
+  }
 
-  next()
+  if (
+    localGetItem(process.env.VUE_APP_LOGIN) == 1 && to.meta.isPublic
+  ) {
+    next()
+  } else {
+    next({ path: "/" })
+  }
 })
 
 export default router

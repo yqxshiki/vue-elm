@@ -120,7 +120,7 @@
       >
         <img
           v-if="ruleForm.image_path"
-          :src="ruleForm.image_pat"
+          :src="ruleForm.image_path"
           class="avatar"
         />
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -210,6 +210,8 @@ export default {
       ruleForm: {
         name: '',
         phone: '',
+        latitude: '',
+        longitude: '',
         description: '',
         promotion_info: '',
         startTime: '',
@@ -412,6 +414,8 @@ export default {
       }
     },
     handleSelect(item) {
+      this.ruleForm.latitude = item.latitude
+      this.ruleForm.longitude = item.longitude
       this.ruleForm.address = item.address
     },
   },

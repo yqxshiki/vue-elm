@@ -9,7 +9,7 @@ export const foodCategory = () => {
 
 export const addShop = (data) => {
   return axios.requset({
-    url: "shopping/addshop",
+    url: "/shopping/addshop",
     method: "post",
     data: data
   })
