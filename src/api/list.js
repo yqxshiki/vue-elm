@@ -72,3 +72,17 @@ export const getFoodList = ({ offset, limit }) => {
     method: "get"
   })
 }
+
+export const DeleteFood = (food_id) => {
+  return axios.requset({
+    url: `/shopping/v2/food/${food_id}`,
+    method: "delete"
+  })
+}
+
+export const UpdateFood = () => {
+  return axios.requset({
+    url: `/shopping/v2/updatefood`,
+    method: "post"
+  })
+}
