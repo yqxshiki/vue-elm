@@ -1,0 +1,45 @@
+#login {
+  background: rgb(50, 64, 87);
+  height: 100vh;
+  .box-card {
+    width: 400px;
+    height: 320px;
+    position: absolute;
+    border-radius: 20px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    box-sizing: border-box;
+    .el-card__header {
+      padding: 0;
+    }
+    .el-card__body {
+      margin-left: -40px;
+    }
+    .text {
+      font-size: 12px;
+    }
+    .clearfix {
+      text-align: center;
+    }
+    .el-form-item {
+      margin-top: 16px;
+      margin-bottom: 0;
+    }
+    .clearfix:before,
+    .clearfix:after {
+      display: table;
+      content: '';
+    }
+    .clearfix:after {
+      clear: both;
+    }
+    .tip {
+      color: red;
+      font-size: 10px;
+      text-align: center;
+    }
+  }
+}

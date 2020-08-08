@@ -58,8 +58,8 @@
           <el-breadcrumb-item
             v-for="(item, index) in $route.meta.title"
             :key="'item' + index"
-            >{{ item }}</el-breadcrumb-item
-          >
+            >{{ item }}
+          </el-breadcrumb-item>
         </el-breadcrumb>
         <el-dropdown>
           <img src="../assets/13.jpg" alt="图像" class="tuxiang" />
@@ -75,7 +75,17 @@
       </el-header>
 
       <el-main>
-        <router-view :key="$route.path"></router-view>
+        <keep-alive>
+          <!-- 需要缓存的视图组件 -->
+          <router-view
+            v-if="$route.meta.keepAlive"
+            :key="$route.path"
+          ></router-view>
+        </keep-alive>
+        <router-view
+          v-if="!$route.meta.keepAlive"
+          :key="$route.path"
+        ></router-view>
       </el-main>
     </el-container>
   </el-container>
@@ -105,33 +115,5 @@ export default {
 </script>
 
 <style lang="scss">
-.el-header {
-  background-color: rgb(239, 242, 247);
-  color: #fff;
-  line-height: 60px;
-}
-
-.el-aside {
-  .el-menu {
-    background-color: rgb(50, 64, 87);
-    .el-submenu__title {
-      color: #fff;
-    }
-    .el-menu-item {
-      color: #fff;
-    }
-    .el-menu-item-group {
-      background-color: #1f2d3d;
-    }
-  }
-}
-.tuxiang {
-  width: 70px;
-  border-radius: 50%;
-  margin-top: 10px;
-}
-.header {
-  display: flex;
-  justify-content: space-between;
-}
+@import '../assets/scss/home.scss';
 </style>
