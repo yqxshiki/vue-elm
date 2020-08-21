@@ -224,6 +224,11 @@ export default {
         piao: false,
         float_minimum_order_amount: 5,
         float_delivery_fee: 5,
+        image_path: '',
+        business_license_image: '',
+        catering_service_license_image: '',
+        activities: [],
+        category: '',
       },
       // 活动
       options: [
@@ -358,7 +363,8 @@ export default {
     },
     async submitForm(formName) {
       this.ruleForm.category = this.category
-      this.ruleForm.activity = this.tableData
+      this.ruleForm.activities = this.tableData
+      console.log(this.ruleForm)
       const data = await addShop(this.ruleForm)
       console.log(data.data)
     },

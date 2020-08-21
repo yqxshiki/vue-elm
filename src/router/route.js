@@ -1,3 +1,5 @@
+import Home from '../views/Home.vue'
+
 // 路由表
 const routes = [
   {

@@ -14,14 +14,16 @@
         label-width="100px"
         class="demo-elm_form"
       >
-        <el-form-item label="用户名" prop="user_name">
+        <!-- prop="user_name" -->
+        <el-form-item label="用户名">
           <el-input
             type="text"
             v-model="elm_form.user_name"
             autocomplete="off"
           ></el-input>
         </el-form-item>
-        <el-form-item label="密码" prop="password">
+        <!-- prop="password" -->
+        <el-form-item label="密码">
           <el-input
             type="password"
             v-model="elm_form.password"
@@ -92,6 +94,7 @@ export default {
             message: '恭喜你，登录成功',
             type: 'success',
           })
+          console.log(res)
           localSetItem(process.env.VUE_APP_LOGIN, res.data.status)
           this.$router.push('/')
         } else {

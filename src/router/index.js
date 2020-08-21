@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-
 // 引入路由表
 import routes from './route'
 
@@ -17,18 +15,18 @@ const router = new VueRouter({
 })
 
 
-router.beforeEach((to, from, next) => {
-  if (to.meta.isPublic == undefined) {
-    to.meta.isPublic = true
-  }
+// router.beforeEach((to, from, next) => {
+//   if (to.meta.isPublic == undefined) {
+//     to.meta.isPublic = true
+//   }
 
-  if (
-    localGetItem(process.env.VUE_APP_LOGIN) == 1 && to.meta.isPublic
-  ) {
-    next()
-  } else {
-    next({ path: "/" })
-  }
-})
+//   if (
+//     localGetItem(process.env.VUE_APP_LOGIN) == 1 && to.meta.isPublic
+//   ) {
+//     next()
+//   } else {
+//     next({ path: "/" })
+//   }
+// })
 
 export default router
